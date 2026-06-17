@@ -1,0 +1,19 @@
+{%extends 'electapp/base.html' %}
+{% block content %}
+<h1>The winner if the Post:{{election.post}}
+{% if winner%}
+
+<div class="jumbotron">
+{% if winner.photo %}
+    <img src="{{ winner.photo.url }}" width="150" height="150">
+{% endif %}
+<p>{{winner.candidate_name}}</p>
+<p>{{winner.grade}}</p>
+</div>
+{% endif %}
+</h1>
+{% for candidate in election.candidates.all %}
+    <p>{{ candidate.candidate_name }} - {{ candidate.votes }} votes</p>
+{% endfor %}
+
+{% endblock %}

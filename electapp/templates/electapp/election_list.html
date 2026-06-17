@@ -1,0 +1,23 @@
+{% extends 'electapp/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        
+        {% for election in elections %}
+            <div class="jumbotron">
+                <h2 class="listclass">
+                    <a href="{% url 'election_detail' pk=election.pk %}">{{election.election_name}}</a>
+                    <a class="pull-right" href="{% url 'remove_election' pk=election.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="pull-right" href="{% url 'update_election' pk=election.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                </h2>
+                <p>create:{{election.created_date}}</p>
+                {% if  not election.is_ended %}
+                <p><a class="btn btn-primary" href="{% url 'end_election' pk=election.pk %}">End Election</a></p>
+                {% else%}
+                <p><a class="btn btn-primary" href="{% url 'election_result' pk=election.pk %}">View Result</a></p>
+                {% endif %}
+           </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

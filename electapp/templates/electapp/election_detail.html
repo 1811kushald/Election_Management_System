@@ -1,0 +1,27 @@
+{% extends 'electapp/base.html' %}
+{% block content %}
+    <div class="jumbotron">
+        <h1>Election for Post:{{election.post}}</h1>
+        <a class="btn btn-primary" href="{% url 'create_candidate' %}">Add Candidate</a>
+        <hr>
+        <h2>Candidates:</h2>
+        <div class="row">
+            {% for candidate in election.candidates.all %}
+            <div class="col-md-4">
+                <div class="well">
+                    <h4>
+                        <a class="pull-right" href="{% url 'remove_candidate' pk=candidate.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a class="pull-right" href="{% url 'edit_candidate' pk=candidate.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </h4>
+                    {% if candidate.photo %}
+                        <img src="{{ candidate.photo.url }}" width="150" height="150">
+                    {% endif %}
+                    <h4>Name:{{ candidate.candidate_name }}</h4>
+                    <h4>Grade: {{ candidate.grade }}</h4>
+                    <h4><a class="btn btn-default" href="{% url 'vote_candidate' pk=candidate.pk %}">Vote</a></h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div> 
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{%extends 'electapp/base.html' %}
+{% block content %}
+<div>
+    <h2>Are you sure you want to delete the candidate : {{object.candidate_name}}?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Confirm">
+    </form>
+</div>
+{% endblock %}
